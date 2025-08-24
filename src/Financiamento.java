@@ -6,9 +6,13 @@ public abstract class Financiamento {
     protected boolean aprovado;
     protected String motivoReprovacao;
 
-    public Financiamento(Cliente cliente, BigDecimal valorBem) {
+    //Adicionei
+    protected int parcelas;
+
+    public Financiamento(Cliente cliente, BigDecimal valorBem, int parcelas) {
         this.cliente = cliente;
         this.valorBem = valorBem;
+        this.parcelas = parcelas;
     }
 
     public abstract void avaliar();
@@ -26,7 +30,7 @@ public abstract class Financiamento {
     protected abstract void exibirDetalhes();
 
     public void getResumo() {
-        System.out.println(cliente.getNome() + " - Valor: R$" + valorBem +
+        System.out.println(cliente.getNome() + " - Valor: R$" + Resources.formatMoeda(valorBem) +
                 " - Status: " + (aprovado ? "Aprovado" : "Reprovado (" + motivoReprovacao + ")"));
     }
 }

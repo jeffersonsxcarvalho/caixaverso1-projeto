@@ -1,5 +1,6 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class Resources {
 
@@ -12,6 +13,15 @@ public class Resources {
         BigDecimal divisor  =   fator.pow(parcelas).subtract(BigDecimal.valueOf(1));
 
         return (dividend.divide(divisor, 2, RoundingMode.HALF_UP)).setScale(2,RoundingMode.HALF_DOWN);
+    }
+
+    public static String formatMoeda(BigDecimal valor) {
+
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+
+        return df.format(valor);
+
+
     }
 
 }
