@@ -8,11 +8,13 @@ public abstract class Financiamento {
 
     //Adicionei
     protected int parcelas;
+    protected BigDecimal entrada;
 
-    public Financiamento(Cliente cliente, BigDecimal valorBem, int parcelas) {
+    public Financiamento(Cliente cliente, BigDecimal valorBem, int parcelas, BigDecimal entrada) {
         this.cliente = cliente;
         this.valorBem = valorBem;
         this.parcelas = parcelas;
+        this.entrada = entrada;
     }
 
     public abstract void avaliar();

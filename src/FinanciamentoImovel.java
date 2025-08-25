@@ -3,12 +3,10 @@ import java.math.RoundingMode;
 
 
 public class FinanciamentoImovel extends Financiamento {
-    private BigDecimal entrada;
-
     private BigDecimal valorParcela;
 
-    public FinanciamentoImovel(Cliente cliente, BigDecimal valorBem, int parcelas) {
-        super(cliente, valorBem, parcelas);
+    public FinanciamentoImovel(Cliente cliente, BigDecimal valorBem, int parcelas, BigDecimal entrada) {
+        super(cliente, valorBem, parcelas, entrada);
     }
 
     public void avaliar() {
@@ -18,7 +16,13 @@ public class FinanciamentoImovel extends Financiamento {
             return;
         }
 
-        entrada = valorBem.multiply(BigDecimal.valueOf(0.2));
+        BigDecimal entradaMin = valorBem.multiply(BigDecimal.valueOf(0.20));
+        if (entrada.compareTo(entradaMin) < 0){
+            aprovado = false;
+            motivoReprovacao = "A entrada deve ser maior que R$" + Resources.formatMoeda(entradaMin) + ".";
+            return;
+        }
+
         BigDecimal valorFinanciado = valorBem.subtract(entrada);
         double jurosAno = 0.08;
         double jurosMes = Math.pow((1 + jurosAno),(double)1/12) - 1;

@@ -44,6 +44,8 @@ public class SistemaUsuario {
                 BigDecimal renda = sc.nextBigDecimal();
                 System.out.print("Digite o valor do bem: ");
                 BigDecimal valor = sc.nextBigDecimal();
+                System.out.print("Digite o valor da entrada: ");
+                BigDecimal entrada = sc.nextBigDecimal();
                 System.out.print("Digite o número de parcelas: ");
                 int parcelas = sc.nextInt();
                 System.out.println();
@@ -52,9 +54,9 @@ public class SistemaUsuario {
                 Financiamento f;
 
                 if (opcao == 1) {
-                    f = new FinanciamentoImovel(cliente, valor, parcelas);
+                    f = new FinanciamentoImovel(cliente, valor, parcelas, entrada);
                 } else {
-                    f = new FinanciamentoVeiculo(cliente, valor, parcelas);
+                    f = new FinanciamentoVeiculo(cliente, valor, parcelas, entrada);
                 }
 
                 f.avaliar();

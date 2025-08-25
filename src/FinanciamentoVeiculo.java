@@ -2,11 +2,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class FinanciamentoVeiculo extends Financiamento {
-    private BigDecimal entrada;
     private BigDecimal valorParcela;
 
-    public FinanciamentoVeiculo(Cliente cliente, BigDecimal valorBem, int parcelas) {
-        super(cliente, valorBem, parcelas);
+    public FinanciamentoVeiculo(Cliente cliente, BigDecimal valorBem, int parcelas, BigDecimal entrada) {
+        super(cliente, valorBem, parcelas, entrada);
     }
 
     public void avaliar() {
@@ -16,8 +15,13 @@ public class FinanciamentoVeiculo extends Financiamento {
             return;
         }
 
+        BigDecimal entradaMin = valorBem.multiply(BigDecimal.valueOf(0.10));
+        if (entrada.compareTo(entradaMin) < 0){
+            aprovado = false;
+            motivoReprovacao = "A entrada deve ser maior que R$" + Resources.formatMoeda(entradaMin) + ".";
+            return;
+        }
 
-        entrada = valorBem.multiply(BigDecimal.valueOf(0.10));
         BigDecimal valorFinanciado = valorBem.subtract(entrada);
         double jurosMes = 0.015;
         valorParcela = Resources.valorParcelas(valorFinanciado, jurosMes, parcelas);
